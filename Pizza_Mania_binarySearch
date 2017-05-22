@@ -1,0 +1,74 @@
+#include<iostream>
+#include <bits/stdc++.h>
+#include<algorithm>
+using namespace std;
+
+
+
+int binarySearch(int arr[], int l, int r, int x)
+{
+  while (l <= r)
+  {
+    int m = l + (r-l)/2;
+    if (arr[m] == x)
+        return m;
+    if (arr[m] < x)
+        l = m + 1;
+ else
+         r = m - 1;
+  }
+  return 0;
+}
+
+
+int noofpizza(int m, int money[], long n)
+{
+int done[n], pairs=0;
+
+for (long i=0; i<n; i++)
+done[i]=0;
+
+for (long j=0; j<n; j++)
+{
+if (done[j]==1)
+continue;
+
+int k,restmoney;
+restmoney = (m-money[j]);
+k=binarySearch(money, j+1,n, restmoney);
+
+  if (k)
+  {
+  done[k]=1;
+  pairs+=1;
+  }
+}
+
+return pairs;
+}
+
+int main(){
+
+ios_base::sync_with_stdio(false);
+cin.tie(NULL);
+
+long n;
+int m,t;
+
+cin>>t;
+
+for (int i=0; i<t; i++)
+{
+cin>>n>>m;
+int money[n];
+
+for(long j=0; j<n; j++)
+cin>>money[j];
+sort(money,money+n);
+
+cout<<noofpizza(m, money,n)<<"\n";
+}
+return 0;
+}
+
+
