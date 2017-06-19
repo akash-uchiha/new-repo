@@ -1,0 +1,45 @@
+#include <iostream>
+using namespace std;
+
+int main() {
+
+int t,stations, maxp,maxdist=0,humans,noofpeople,dist;
+
+
+cin>>t;
+
+for (int j=0; j<t; j++)
+{
+cin>>stations>>maxp;
+int people[stations];
+
+int i=0;
+while(i<stations)
+{cin>>people[i];
+i++;}
+
+for (int k=0; k<stations; k++)
+{
+    long sum=0;
+    for (int l=k; l<stations; l++)
+    {
+        sum+=people[l];
+        if (sum>maxp)
+        {
+	        sum-=people[l];
+	        noofpeople=sum;
+	        dist=l;
+	        break;
+        }   
+
+    }
+    if (dist>maxdist)
+    {
+        maxdist=dist;
+        humans=noofpeople;
+    }
+}
+cout<<humans<<" "<<maxdist<<"\n";
+}
+	return 0;
+}
